@@ -2,12 +2,12 @@ package com.alitapan.kaboom.init;
 
 
 import com.alitapan.kaboom.Kaboom;
-import com.alitapan.kaboom.entities.AbstractBombEntity;
+import com.alitapan.kaboom.entities.EnderBombEntity;
 import com.alitapan.kaboom.entities.IronBombEntity;
+import com.alitapan.kaboom.entities.MagmaBombEntity;
 
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.projectile.ProjectileItemEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -20,11 +20,11 @@ public class ModEntityTypes {
 			.size(0.9f, 1.3f)
 			.build(new ResourceLocation(Kaboom.MOD_ID, "iron_bomb").toString()));
 	
-	public static final RegistryObject<EntityType<? extends ProjectileItemEntity>> MAGMA_BOMB_ENTITY = ENTITY_TYPES.register("magma_bomb", () -> EntityType.Builder.<AbstractBombEntity>create(AbstractBombEntity::new, EntityClassification.MISC)
+	public static final RegistryObject<EntityType<? extends MagmaBombEntity>> MAGMA_BOMB_ENTITY = ENTITY_TYPES.register("magma_bomb", () -> EntityType.Builder.<MagmaBombEntity>create(MagmaBombEntity::new, EntityClassification.MISC)
 			.size(0.9f, 1.3f)
 			.build(new ResourceLocation(Kaboom.MOD_ID, "magma_bomb").toString()));
 	
-	public static final RegistryObject<EntityType<? extends ProjectileItemEntity>> ENDER_BOMB_ENTITY = ENTITY_TYPES.register("ender_bomb", () -> EntityType.Builder.<AbstractBombEntity>create(AbstractBombEntity::new, EntityClassification.MISC)
+	public static final RegistryObject<EntityType<? extends EnderBombEntity>> ENDER_BOMB_ENTITY = ENTITY_TYPES.register("ender_bomb", () -> EntityType.Builder.<EnderBombEntity>create(EnderBombEntity::new, EntityClassification.MISC)
 			.size(0.9f, 1.3f)
 			.build(new ResourceLocation(Kaboom.MOD_ID, "ender_bomb").toString()));
 	

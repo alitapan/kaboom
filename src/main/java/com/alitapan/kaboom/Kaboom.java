@@ -18,7 +18,7 @@ public class Kaboom
 {
     public static final String MOD_ID = "kaboom";
     public static Kaboom instance;
-
+ 
     public Kaboom() {
     	final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
     	modEventBus.addListener(this::setup);
