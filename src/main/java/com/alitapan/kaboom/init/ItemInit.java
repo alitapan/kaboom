@@ -1,6 +1,7 @@
 package com.alitapan.kaboom.init;
 
 import com.alitapan.kaboom.Kaboom;
+import com.alitapan.kaboom.objects.items.IronBombItem;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -31,7 +32,7 @@ public class ItemInit {
 	public static void registerItems(final RegistryEvent.Register<Item> event) {
 		
 		// Firebombs
-		event.getRegistry().register(new Item(new Item.Properties().group(ItemGroup.COMBAT)).setRegistryName("iron_bomb"));
+		event.getRegistry().register(new IronBombItem(new Item.Properties().group(ItemGroup.COMBAT)).setRegistryName("iron_bomb"));
 		event.getRegistry().register(new Item(new Item.Properties().group(ItemGroup.COMBAT)).setRegistryName("magma_bomb"));
 		event.getRegistry().register(new Item(new Item.Properties().group(ItemGroup.COMBAT)).setRegistryName("ender_bomb"));
 
