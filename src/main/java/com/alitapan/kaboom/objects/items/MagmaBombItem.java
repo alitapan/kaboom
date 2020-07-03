@@ -14,10 +14,15 @@ import net.minecraft.world.World;
 
 public class MagmaBombItem extends Item{
 	
+	// CONSTRUCTOR
+	// --------------------------------------------------------------------------------------------//
+	
 	public MagmaBombItem(Properties properties) {
 		super(properties);
 	}
 	
+	// --------------------------------------------------------------------------------------------//
+
    /**
     * Called to trigger the item's "innate" right click behavior. To handle when this item is used on a Block, see
     * {@link #onItemUse}.
@@ -26,10 +31,10 @@ public class MagmaBombItem extends Item{
       ItemStack itemstack = playerIn.getHeldItem(handIn);
       worldIn.playSound((PlayerEntity)null, playerIn.getPosX(), playerIn.getPosY(), playerIn.getPosZ(), SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
       if (!worldIn.isRemote) {
-    	 MagmaBombEntity magmabombEntity = new MagmaBombEntity(worldIn, playerIn);
-    	 magmabombEntity.setItem(itemstack);
-    	 magmabombEntity.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
-         worldIn.addEntity(magmabombEntity);
+    	 MagmaBombEntity magmaBombEntity = new MagmaBombEntity(worldIn, playerIn);
+    	 magmaBombEntity.setItem(itemstack);
+    	 magmaBombEntity.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
+         worldIn.addEntity(magmaBombEntity);
       }
 
       playerIn.addStat(Stats.ITEM_USED.get(this));

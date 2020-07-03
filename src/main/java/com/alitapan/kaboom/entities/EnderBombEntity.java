@@ -23,6 +23,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 public class EnderBombEntity extends ProjectileItemEntity {
+	
+	// CONSTRUCTORS
+	// --------------------------------------------------------------------------------------------//
+	
     public EnderBombEntity(EntityType<? extends EnderBombEntity> p_i50159_1_, World p_i50159_2_) {
     	super(p_i50159_1_, p_i50159_2_);
 	}
@@ -31,44 +35,48 @@ public class EnderBombEntity extends ProjectileItemEntity {
     }
 
     public EnderBombEntity(World worldIn, double x, double y, double z) {
-        super(ModEntityTypes.ENDER_BOMB_ENTITY.get(), x, y, z, worldIn);
+    	super(ModEntityTypes.ENDER_BOMB_ENTITY.get(), x, y, z, worldIn);
     } 
+    
+    // --------------------------------------------------------------------------------------------//
     
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     public IPacket createSpawnPacket() {
-       return NetworkHooks.getEntitySpawningPacket(this);
+    	return NetworkHooks.getEntitySpawningPacket(this);
     }
    
     @Override
     protected Item getDefaultItem() {
-        return ItemInit.ender_bomb;
+    	return ItemInit.ender_bomb;
     }
 	   
 	@Override
 	protected void onImpact(RayTraceResult result) {
-	      RayTraceResult.Type raytraceresult$type = result.getType();
-	      if (raytraceresult$type == RayTraceResult.Type.BLOCK) {
-	         BlockRayTraceResult blockraytraceresult = (BlockRayTraceResult)result;
-	         BlockState blockstate = this.world.getBlockState(blockraytraceresult.getPos());
-	         blockstate.onProjectileCollision(this.world, blockstate, blockraytraceresult, this);
-	      }
-	      if (result.getType() != RayTraceResult.Type.ENTITY || !((EntityRayTraceResult)result).getEntity().isEntityEqual(this.owner)) {
-	         if (!this.world.isRemote) {
-	            List<LivingEntity> list = this.world.getEntitiesWithinAABB(LivingEntity.class, this.getBoundingBox().grow(4.0D, 2.0D, 4.0D));
+		
+		// Taken from DragonFireBallEntity class - Creates an AOE damage effect with Ender particles
+		
+	    RayTraceResult.Type raytraceresult$type = result.getType();
+	    if (raytraceresult$type == RayTraceResult.Type.BLOCK) {
+	    	BlockRayTraceResult blockraytraceresult = (BlockRayTraceResult)result;
+	        BlockState blockstate = this.world.getBlockState(blockraytraceresult.getPos());
+	        blockstate.onProjectileCollision(this.world, blockstate, blockraytraceresult, this);
+	    }
+	    if (result.getType() != RayTraceResult.Type.ENTITY || !((EntityRayTraceResult)result).getEntity().isEntityEqual(this.owner)) {
+	        if (!this.world.isRemote) {
+	        	List<LivingEntity> list = this.world.getEntitiesWithinAABB(LivingEntity.class, this.getBoundingBox().grow(4.0D, 2.0D, 4.0D));
 	            AreaEffectCloudEntity areaeffectcloudentity = new AreaEffectCloudEntity(this.world, this.getPosX(), this.getPosY(), this.getPosZ());
-	           // areaeffectcloudentity.setOwner(this.shootingEntity);
 	            areaeffectcloudentity.setParticleData(ParticleTypes.DRAGON_BREATH);
 	            areaeffectcloudentity.setRadius(3.0F);
 	            areaeffectcloudentity.setDuration(600);
 	            areaeffectcloudentity.setRadiusPerTick((7.0F - areaeffectcloudentity.getRadius()) / (float)areaeffectcloudentity.getDuration());
 	            areaeffectcloudentity.addEffect(new EffectInstance(Effects.INSTANT_DAMAGE, 10, 1));
 	            if (!list.isEmpty()) {
-	               for(LivingEntity livingentity : list) {
-	                  double d0 = this.getDistanceSq(livingentity);
-	                  if (d0 < 16.0D) {
-	                     areaeffectcloudentity.setPosition(livingentity.getPosX(), livingentity.getPosY(), livingentity.getPosZ());
-	                     break;
+	            	for(LivingEntity livingentity : list) {
+	            		double d0 = this.getDistanceSq(livingentity);
+	            		if (d0 < 16.0D) {
+	            			areaeffectcloudentity.setPosition(livingentity.getPosX(), livingentity.getPosY(), livingentity.getPosZ());
+	            			break;
 	                  }
 	               }
 	            }

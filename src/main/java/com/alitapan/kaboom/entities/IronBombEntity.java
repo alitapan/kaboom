@@ -15,6 +15,9 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 public class IronBombEntity extends ProjectileItemEntity {
 	
+	// CONSTRUCTORS 
+	// --------------------------------------------------------------------------------------------//
+	
     public IronBombEntity(EntityType<? extends IronBombEntity> p_i50159_1_, World p_i50159_2_) {
     	super(p_i50159_1_, p_i50159_2_);
 	}
@@ -26,10 +29,12 @@ public class IronBombEntity extends ProjectileItemEntity {
         super(ModEntityTypes.IRON_BOMB_ENTITY.get(), x, y, z, worldIn);
     } 
     
+    // --------------------------------------------------------------------------------------------//
+    
     @SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
     public IPacket createSpawnPacket() {
-       return NetworkHooks.getEntitySpawningPacket(this);
+        return NetworkHooks.getEntitySpawningPacket(this);
     }
     
     @Override
@@ -39,10 +44,11 @@ public class IronBombEntity extends ProjectileItemEntity {
 	   
 	@Override
 	protected void onImpact(RayTraceResult result) {
+		// Standard explosion upon impact - same as TNT explosion
 	    this.world.createExplosion(this, this.getPosX(), this.getPosYHeight(0.00625D), this.getPosZ(), 4.0F, Explosion.Mode.BREAK);
 	    if (!this.world.isRemote) {
-		      this.world.setEntityState(this, (byte)3);
-		      this.remove();
+	    	this.world.setEntityState(this, (byte)3);
+	    	this.remove();
 		   }
 		
 	}

@@ -11,8 +11,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-
-// The value here should match an entry in the META-INF/mods.toml file
 @Mod("kaboom")
 public class Kaboom
 {
@@ -22,24 +20,18 @@ public class Kaboom
     public Kaboom() {
     	final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
     	modEventBus.addListener(this::setup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
-        
+    	modEventBus.addListener(this::doClientStuff);
+    	
+    	// Register entity types
         ModEntityTypes.ENTITY_TYPES.register(modEventBus);
+        
         instance= this;
         MinecraftForge.EVENT_BUS.register(this);
     }
 
-    private void setup(final FMLCommonSetupEvent event)
-    {
-
-    }
-
-    private void doClientStuff(final FMLClientSetupEvent event) {
-
-    }
-
+    private void setup(final FMLCommonSetupEvent event){}
+    private void doClientStuff(final FMLClientSetupEvent event) {}
     @SubscribeEvent
-    public void onServerStarting(FMLServerStartingEvent event) {
-    }
+    public void onServerStarting(FMLServerStartingEvent event) {}
 
 }
