@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "#X#",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "tag": "forge:ingots/gold"
+    },
+    "X": [
+      {
+        "item": "minecraft:blaze_powder"
+      }
+    ]
+  },
+  "result": {
+    "item": "kaboom:magma_bomb",
+    "count": 3
+  }
+}
